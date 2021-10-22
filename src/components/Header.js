@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-
-const categories = ["Fruit", "Vegies", "Grocery", "Fridge", "Liquor"];
+import { useDispatch, useSelector } from "react-redux";
+import { fecthCategory } from "../pages/product/categoryAction";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.category);
+
+  useEffect(() => {
+    dispatch(fecthCategory());
+  }, [dispatch]);
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
       <Container>
@@ -14,11 +20,14 @@ const Header = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            {categories.map((value) => (
-              <LinkContainer to={`/${value.toLowerCase()}`}>
-                <Nav.Link>{value}</Nav.Link>
-              </LinkContainer>
-            ))}
+            {categories.map(
+              (value) =>
+                !value.parentCat && (
+                  <LinkContainer to={`/${value.slug}`}>
+                    <Nav.Link key={value._id}>{value.name}</Nav.Link>
+                  </LinkContainer>
+                )
+            )}
           </Nav>
           <Nav>
             <LinkContainer to="/cart">

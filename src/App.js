@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "bootswatch/dist/yeti/bootstrap.min.css";
 import "./App.css";
 import Layout from "./components/Layout";
-import Product from "./pages/Product";
+import Product from "./pages/product/Product";
 
 function App() {
   return (

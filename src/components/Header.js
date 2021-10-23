@@ -22,7 +22,8 @@ const Header = () => {
           <Nav className="me-auto">
             {categories.map(
               (value) =>
-                !value.parentCat && (
+                !value.parentCat &&
+                value.status === "active" && (
                   <LinkContainer to={`/${value.slug}`}>
                     <Nav.Link key={value._id}>{value.name}</Nav.Link>
                   </LinkContainer>

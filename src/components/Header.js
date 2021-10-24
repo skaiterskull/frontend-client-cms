@@ -9,10 +9,12 @@ const Header = () => {
   const { categories } = useSelector((state) => state.category);
 
   useEffect(() => {
-    dispatch(fecthCategory());
-  }, [dispatch]);
+    if (!categories.length) {
+      dispatch(fecthCategory());
+    }
+  }, [dispatch, categories]);
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
       <Container>
         <LinkContainer to="/">
           <Navbar.Brand>E-Shop</Navbar.Brand>

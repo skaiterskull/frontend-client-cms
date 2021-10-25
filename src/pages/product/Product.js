@@ -1,72 +1,116 @@
-import React, { useEffect } from "react";
-import { Container, Card, Row, Col, Form, Button } from "react-bootstrap";
-import { useParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Image,
+  Badge,
+  Form,
+  Button,
+  Spinner,
+  ListGroup,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "./productAction";
+import { fetchProductBySlug } from "../category/productAction";
 import Layout from "../../components/Layout";
 
 const Product = () => {
-  const { category } = useParams();
-  const { categories } = useSelector((state) => state.category);
-  const { productList } = useSelector((state) => state.product);
+  const [imgIndex, setImgIndex] = useState(0);
+  const { category, productSlug } = useParams();
+  const { productList, isPending } = useSelector((state) => state.product);
   const dispatch = useDispatch();
-  const catId = categories.filter((value) => value.slug === category);
+  const productInState = productList.filter((value) =>
+    value.slug.includes(productSlug)
+  )[0];
 
   useEffect(() => {
-    if (catId[0]) {
-      dispatch(fetchProducts(catId[0]?._id));
+    if (!productInState) {
+      dispatch(fetchProductBySlug(productSlug));
     }
-  }, [dispatch, categories, catId[0]]);
+  }, [dispatch, productSlug, productInState]);
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
-  };
+  if (isPending) {
+    return (
+      <Layout>
+        <Spinner
+          animation="grow"
+          variant="primary"
+          style={{ position: "absolute", top: "50%", left: "50%" }}
+        ></Spinner>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
       <Container>
-        <h2 style={{ marginTop: "5rem" }}>{category} page.</h2>
-        <p>{productList.length} products found.</p>
-        <Row>
-          {productList.map((value) => (
-            <Col
-              lg={3}
-              md={4}
-              sm={6}
-              xs={6}
-              className="d-flex justify-content-center mb-5"
-            >
-              <Card style={{ width: "15rem" }}>
-                <Link to="/">
-                  <Card.Img variant="top" src={value.images} />
-                </Link>
-                <Card.Body>
-                  <Card.Title className="text-center">{value.title}</Card.Title>
-                  <Card.Text className="text-center">$ {value.price}</Card.Text>
-                  <Form
-                    onSubmit={handleOnSubmit}
-                    className=" d-flex justify-content-between"
-                  >
-                    <Form.Group>
-                      <Form.Select defaultValue="1" style={{ width: "5rem" }}>
-                        {[...Array(20)].map((x, i) => (
-                          <option key={i} value={i + 1}>
-                            {i + 1}
-                          </option>
-                        ))}
-                      </Form.Select>
-                    </Form.Group>
-                    <Button>
-                      Add <i class="fas fa-shopping-cart"></i>
-                    </Button>
-                  </Form>
-                </Card.Body>
-              </Card>
+        <h2 style={{ marginTop: "5rem" }}>This is product landing page</h2>
+        <Link to={`/${category}`}>
+          <h5>Go back</h5>
+        </Link>
+        <hr />
+        <div className="text-center">
+          {isPending && <Spinner variant="primary" animation="grow"></Spinner>}
+        </div>
+
+        {productInState ? (
+          <Row>
+            <Col lg={6} className="mb-3">
+              <Image src={productInState?.images[imgIndex]} rounded fluid />
             </Col>
-          ))}
-        </Row>
+            <Col lg={6}>
+              <h1 className=" fw-bold text-info">{productInState?.title}</h1>
+              <p className="text-muted text-secondary">
+                * {productInState?.brand}
+              </p>
+              <p>{productInState?.description}</p>
+              <h1 className="mb-3">
+                <Badge bg="success">$ {productInState?.price}</Badge>
+              </h1>
+              <Form className=" d-flex gap-3 mb-3">
+                <Form.Group>
+                  <Form.Select defaultValue="1" style={{ width: "5rem" }}>
+                    {[...Array(20)].map((x, i) => (
+                      <option key={i} value={i + 1}>
+                        {i + 1}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+                <Button>
+                  Add <i className="fas fa-shopping-cart"></i>
+                </Button>
+              </Form>
+              <div>
+                <ListGroup horizontal style={{ width: "fit-content" }}>
+                  {productInState?.images.map((value, i) => {
+                    if (i < 5) {
+                      return (
+                        <ListGroup.Item
+                          style={{ cursor: "pointer" }}
+                          onClick={() => {
+                            setImgIndex(i);
+                          }}
+                        >
+                          <Image
+                            src={value}
+                            style={{ maxWidth: "2.5rem" }}
+                          ></Image>
+                        </ListGroup.Item>
+                      );
+                    }
+                  })}
+                </ListGroup>
+              </div>
+            </Col>
+          </Row>
+        ) : (
+          <div>Data not found.</div>
+        )}
       </Container>
+      ;
     </Layout>
   );
 };

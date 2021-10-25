@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fecthCategory } from "../pages/product/categoryAction";
+import { fecthCategory } from "../pages/category/categoryAction";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -34,10 +34,14 @@ const Header = () => {
           </Nav>
           <Nav>
             <LinkContainer to="/cart">
-              <Nav.Link>Cart</Nav.Link>
+              <Nav.Link>
+                Cart <i class="fas fa-shopping-cart"></i>
+              </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/login">
-              <Nav.Link>Login</Nav.Link>
+              <Nav.Link>
+                Login <i class="fas fa-user"></i>
+              </Nav.Link>
             </LinkContainer>
           </Nav>
         </Navbar.Collapse>

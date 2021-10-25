@@ -6,7 +6,12 @@ const rootUrl =
     : "http://localhost:5000";
 const apiUrl = rootUrl + "/api/v2/product";
 
-export const getProduct = async (catId) => {
+export const getProductByCatId = async (catId) => {
   const { data } = await axios.get(`${apiUrl}/${catId}`);
+  return data;
+};
+
+export const getProductBySlug = async (slug) => {
+  const { data } = await axios.get(`${apiUrl}/get/${slug}`);
   return data;
 };

@@ -13,7 +13,7 @@ const productSlice = createSlice({
       state.isPending = true;
     },
 
-    REQ_PRO_SUCCESS: (state, { payload = [] }) => {
+    REQ_PRO_SUCCESS: (state, { payload = {} }) => {
       state.isPending = false;
       state.productList = payload.result;
     },

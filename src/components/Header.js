@@ -7,6 +7,7 @@ import { fecthCategory } from "../pages/category/categoryAction";
 const Header = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
+  const { cartList } = useSelector((state) => state.cart);
 
   useEffect(() => {
     if (!categories.length) {
@@ -26,7 +27,7 @@ const Header = () => {
               (value) =>
                 !value.parentCat &&
                 value.status === "active" && (
-                  <LinkContainer to={`/${value.slug}`}>
+                  <LinkContainer to={`/${value.slug}`} key={value._id}>
                     <Nav.Link key={value._id}>{value.name}</Nav.Link>
                   </LinkContainer>
                 )
@@ -35,12 +36,17 @@ const Header = () => {
           <Nav>
             <LinkContainer to="/cart">
               <Nav.Link>
-                Cart <i class="fas fa-shopping-cart"></i>
+                Cart <i className="fas fa-shopping-cart"></i> (
+                {cartList.reduce(
+                  (ttlItem, value) => (ttlItem = ttlItem + value.qty),
+                  0
+                )}
+                )
               </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/login">
               <Nav.Link>
-                Login <i class="fas fa-user"></i>
+                Login <i className="fas fa-user"></i>
               </Nav.Link>
             </LinkContainer>
           </Nav>

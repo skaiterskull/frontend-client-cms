@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Card,
@@ -28,9 +28,15 @@ const Category = () => {
     }
   }, [dispatch, categories, catId]);
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
-  };
+  if (!catId) {
+    return (
+      <Layout>
+        <Container>
+          <p style={{ marginTop: "5rem" }}>Page not found</p>
+        </Container>
+      </Layout>
+    );
+  }
 
   if (isPending) {
     return (
@@ -52,6 +58,7 @@ const Category = () => {
         <Row>
           {productList.map((value) => (
             <Col
+              key={value._id}
               lg={3}
               md={4}
               sm={6}
@@ -69,12 +76,12 @@ const Category = () => {
                       <Badge bg="success">$ {value.price}</Badge>
                     </h3>
                   </Card.Text>
-                  <Form
-                    onSubmit={handleOnSubmit}
-                    className=" d-flex justify-content-between"
-                  >
+                  <Form className=" d-flex justify-content-between">
                     <Form.Group>
-                      <Form.Select defaultValue="1" style={{ width: "5rem" }}>
+                      <Form.Select
+                        defaultValue="1"
+                        style={{ width: "fit-content" }}
+                      >
                         {[...Array(20)].map((x, i) => (
                           <option key={i} value={i + 1}>
                             {i + 1}
@@ -82,8 +89,8 @@ const Category = () => {
                         ))}
                       </Form.Select>
                     </Form.Group>
-                    <Button>
-                      Add <i class="fas fa-shopping-cart"></i>
+                    <Button disabled={value.qty < 1} type="submit">
+                      Add <i className="fas fa-shopping-cart"></i>
                     </Button>
                   </Form>
                 </Card.Body>

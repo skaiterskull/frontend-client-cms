@@ -14,10 +14,12 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductBySlug } from "../category/productAction";
+import { addDataToCart } from "../cart/cartAction";
 import Layout from "../../components/Layout";
 
 const Product = () => {
   const [imgIndex, setImgIndex] = useState(0);
+  const [cartQty, setCartQty] = useState(1);
   const { category, productSlug } = useParams();
   const { productList, isPending } = useSelector((state) => state.product);
   const dispatch = useDispatch();
@@ -30,6 +32,26 @@ const Product = () => {
       dispatch(fetchProductBySlug(productSlug));
     }
   }, [dispatch, productSlug, productInState]);
+
+  const handleOnChange = (e) => {
+    const { value } = e.target;
+    setCartQty(Number(value));
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const { _id, title, images, price, slug } = productInState;
+    const cartData = {
+      _id,
+      title,
+      images: images[0],
+      price,
+      qty: cartQty,
+      slug,
+      category,
+    };
+    dispatch(addDataToCart(cartData));
+  };
 
   if (isPending) {
     return (
@@ -69,9 +91,13 @@ const Product = () => {
               <h1 className="mb-3">
                 <Badge bg="success">$ {productInState?.price}</Badge>
               </h1>
-              <Form className=" d-flex gap-3 mb-3">
+              <Form className=" d-flex gap-3 mb-3" onSubmit={handleOnSubmit}>
                 <Form.Group>
-                  <Form.Select defaultValue="1" style={{ width: "5rem" }}>
+                  <Form.Select
+                    onChange={handleOnChange}
+                    defaultValue="1"
+                    style={{ width: "5rem" }}
+                  >
                     {[...Array(20)].map((x, i) => (
                       <option key={i} value={i + 1}>
                         {i + 1}
@@ -79,7 +105,7 @@ const Product = () => {
                     ))}
                   </Form.Select>
                 </Form.Group>
-                <Button>
+                <Button disabled={productInState.qty < 1} type="submit">
                   Add <i className="fas fa-shopping-cart"></i>
                 </Button>
               </Form>
@@ -89,6 +115,7 @@ const Product = () => {
                     if (i < 5) {
                       return (
                         <ListGroup.Item
+                          key={i}
                           style={{ cursor: "pointer" }}
                           onClick={() => {
                             setImgIndex(i);

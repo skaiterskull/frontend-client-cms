@@ -4,6 +4,8 @@ import "./App.css";
 import Layout from "./components/Layout";
 import Category from "./pages/category/Category";
 import Product from "./pages/product/Product";
+import Cart from "./pages/cart/Cart";
+import Checkout from "./pages/checkout/Checkout";
 
 function App() {
   return (
@@ -13,7 +15,12 @@ function App() {
           <Route exact path="/">
             <Layout />
           </Route>
-          <Route path="/cart">hi</Route>
+          <Route path="/cart">
+            <Cart />
+          </Route>
+          <Route path="/checkout">
+            <Checkout />
+          </Route>
           <Route path="/login">hi</Route>
           <Route exact path="/:category">
             <Category />

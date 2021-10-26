@@ -37,8 +37,8 @@ const Header = () => {
             <LinkContainer to="/cart">
               <Nav.Link>
                 Cart <i className="fas fa-shopping-cart"></i> (
-                {cartList.reduce(
-                  (ttlItem, value) => (ttlItem = ttlItem + value.qty),
+                {cartList?.reduce(
+                  (ttlItem, value) => (ttlItem = ttlItem + value?.qty),
                   0
                 )}
                 )

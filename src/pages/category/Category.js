@@ -1,14 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Card,
-  Row,
-  Col,
-  Form,
-  Button,
-  Spinner,
-  Badge,
-} from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Container, Card, Row, Col, Spinner, Badge } from "react-bootstrap";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -53,7 +44,9 @@ const Category = () => {
   return (
     <Layout>
       <Container>
-        <h2 style={{ marginTop: "5rem" }}>{category} page.</h2>
+        <h2 className="uppercase" style={{ marginTop: "5rem" }}>
+          {category} page.
+        </h2>
         <p>{productList.length} products found.</p>
         <Row>
           {productList.map((value) => (
@@ -76,23 +69,6 @@ const Category = () => {
                       <Badge bg="success">$ {value.price}</Badge>
                     </h3>
                   </Card.Text>
-                  <Form className=" d-flex justify-content-between">
-                    <Form.Group>
-                      <Form.Select
-                        defaultValue="1"
-                        style={{ width: "fit-content" }}
-                      >
-                        {[...Array(20)].map((x, i) => (
-                          <option key={i} value={i + 1}>
-                            {i + 1}
-                          </option>
-                        ))}
-                      </Form.Select>
-                    </Form.Group>
-                    <Button disabled={value.qty < 1} type="submit">
-                      Add <i className="fas fa-shopping-cart"></i>
-                    </Button>
-                  </Form>
                 </Card.Body>
               </Card>
             </Col>

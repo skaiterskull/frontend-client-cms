@@ -68,7 +68,7 @@ const Product = () => {
   return (
     <Layout>
       <Container>
-        <h2 style={{ marginTop: "5rem" }}>This is product landing page</h2>
+        <h2 style={{ marginTop: "5rem" }}>Product Details</h2>
         <Link to={`/${category}`}>
           <h5>Go back</h5>
         </Link>

@@ -29,9 +29,13 @@ const cartSlice = createSlice({
         state.cartList = arg;
       }
     },
+    REQ_REMOVE_CART: (state, { payload }) => {
+      const arg = state.cartList?.filter((row) => row._id !== payload);
+      state.cartList = arg;
+    },
   },
 });
 
 const { reducer, actions } = cartSlice;
-export const { REQ_ADD_CART, REQ_UPDATE_QTY } = actions;
+export const { REQ_ADD_CART, REQ_UPDATE_QTY, REQ_REMOVE_CART } = actions;
 export default reducer;

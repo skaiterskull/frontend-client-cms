@@ -80,7 +80,34 @@ const Product = () => {
         {productInState ? (
           <Row>
             <Col lg={6} className="mb-3">
-              <Image src={productInState?.images[imgIndex]} rounded fluid />
+              <Image
+                className="mb-3"
+                src={productInState?.images[imgIndex]}
+                rounded
+                fluid
+              />
+              <div className="d-flex justify-content-center">
+                <ListGroup horizontal style={{ width: "fit-content" }}>
+                  {productInState?.images.map((value, i) =>
+                    i < 5 ? (
+                      <ListGroup.Item
+                        key={i}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          setImgIndex(i);
+                        }}
+                      >
+                        <Image
+                          src={value}
+                          style={{ maxWidth: "2.5rem" }}
+                        ></Image>
+                      </ListGroup.Item>
+                    ) : (
+                      ""
+                    )
+                  )}
+                </ListGroup>
+              </div>
             </Col>
             <Col lg={6}>
               <h1 className=" fw-bold text-info">{productInState?.title}</h1>
@@ -109,28 +136,6 @@ const Product = () => {
                   Add <i className="fas fa-shopping-cart"></i>
                 </Button>
               </Form>
-              <div>
-                <ListGroup horizontal style={{ width: "fit-content" }}>
-                  {productInState?.images.map((value, i) => {
-                    if (i < 5) {
-                      return (
-                        <ListGroup.Item
-                          key={i}
-                          style={{ cursor: "pointer" }}
-                          onClick={() => {
-                            setImgIndex(i);
-                          }}
-                        >
-                          <Image
-                            src={value}
-                            style={{ maxWidth: "2.5rem" }}
-                          ></Image>
-                        </ListGroup.Item>
-                      );
-                    }
-                  })}
-                </ListGroup>
-              </div>
             </Col>
           </Row>
         ) : (

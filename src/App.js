@@ -6,6 +6,8 @@ import Category from "./pages/category/Category";
 import Product from "./pages/product/Product";
 import Cart from "./pages/cart/Cart";
 import Checkout from "./pages/checkout/Checkout";
+import Registration from "./pages/registration/Registration";
+import Verification from "./pages/verification/Verification";
 
 function App() {
   return (
@@ -15,13 +17,19 @@ function App() {
           <Route exact path="/">
             <Layout />
           </Route>
+          <Route path="/registration">
+            <Registration />
+          </Route>
+          <Route path="/verification">
+            <Verification />
+          </Route>
           <Route path="/cart">
             <Cart />
           </Route>
           <Route path="/checkout">
             <Checkout />
           </Route>
-          <Route path="/login">hi</Route>
+
           <Route exact path="/:category">
             <Category />
           </Route>

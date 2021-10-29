@@ -49,6 +49,11 @@ const Header = () => {
                 Login <i className="fas fa-user"></i>
               </Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/registration">
+              <Nav.Link>
+                Sign Up <i className="fas fa-user-plus"></i>
+              </Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Container>

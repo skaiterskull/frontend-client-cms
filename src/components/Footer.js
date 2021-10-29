@@ -1,11 +1,7 @@
 import React from "react";
 
 const Footer = () => {
-  return (
-    <footer className="d-flex justify-content-center">
-      Copyright &copy; E - Shop
-    </footer>
-  );
+  return <div>Copyright &copy; E - Shop</div>;
 };
 
 export default Footer;

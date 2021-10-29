@@ -8,7 +8,7 @@ import { REQ_UPDATE_QTY, REQ_REMOVE_CART } from "./cartSlice";
 const Cart = () => {
   const { cartList } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  console.log(cartList.length);
+
   return (
     <Layout>
       <Container>
@@ -30,7 +30,7 @@ const Cart = () => {
               </thead>
               <tbody>
                 {cartList?.map((value) => (
-                  <tr className="p-0">
+                  <tr className="p-0" key={cartList?._id}>
                     <td style={{ width: "10%" }}>
                       <Link to={`/${value?.category}/${value?.slug}`}>
                         <Image

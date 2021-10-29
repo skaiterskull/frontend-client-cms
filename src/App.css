@@ -3,6 +3,14 @@ a {
   color: inherit;
 }
 
+a:hover {
+  color: inherit;
+}
+
 .uppercase::first-letter {
   text-transform: uppercase;
+}
+
+.regis-page {
+  background: #fff;
 }

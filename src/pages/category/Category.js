@@ -64,10 +64,8 @@ const Category = () => {
                 </Link>
                 <Card.Body>
                   <Card.Title className="text-center">{value.title}</Card.Title>
-                  <Card.Text className="text-center">
-                    <h3>
-                      <Badge bg="success">$ {value.price}</Badge>
-                    </h3>
+                  <Card.Text className="text-center fs-3">
+                    <Badge bg="success">$ {value.price}</Badge>
                   </Card.Text>
                 </Card.Body>
               </Card>

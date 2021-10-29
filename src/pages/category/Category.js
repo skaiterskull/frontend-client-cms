@@ -23,7 +23,10 @@ const Category = () => {
     return (
       <Layout>
         <Container>
-          <p style={{ marginTop: "5rem" }}>Page not found</p>
+          <p style={{ marginTop: "5rem", fontSize: "20px" }}>
+            <span style={{ fontSize: "30px", color: "red" }}>404</span> Page not
+            found
+          </p>
         </Container>
       </Layout>
     );

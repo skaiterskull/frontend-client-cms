@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Row, Card, Container, Form, Button, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Footer from "../../components/Footer";
 import { CustomModal } from "../../components/CustomModal";
 import { addNewUser } from "../../apis/userApi";
 import Layout from "../../components/Layout";

@@ -18,3 +18,16 @@ export const addNewUser = async (newUser) => {
     };
   }
 };
+
+export const checkPin = async (email) => {
+  try {
+    const { data } = await axios.post(`${apiUrl}/email-verification`, email);
+    return data;
+  } catch (error) {
+    const { message, status } = error.response.data;
+    return {
+      status,
+      message,
+    };
+  }
+};

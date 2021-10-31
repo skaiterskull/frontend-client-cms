@@ -14,3 +14,20 @@ a:hover {
 .regis-page {
   background: #fff;
 }
+
+.login-card {
+  padding: 5rem;
+  background: black;
+  margin-top: 10rem;
+  width: 700px;
+}
+
+.green-button {
+  background: green;
+  border: green;
+  border-radius: 10px;
+}
+
+.green-button:hover {
+  background: rgb(2, 82, 2);
+}

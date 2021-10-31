@@ -107,7 +107,7 @@ const Cart = () => {
             </div>
             <div className=" p-3 text-end">
               <Link to="/checkout">
-                <Button className="mb-3 " variant="dark">
+                <Button className="mb-3 green-button " variant="dark">
                   <i className="far fa-credit-card"></i> Proceed to Checkout
                 </Button>
               </Link>

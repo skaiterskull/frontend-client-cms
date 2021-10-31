@@ -8,6 +8,7 @@ import Cart from "./pages/cart/Cart";
 import Checkout from "./pages/checkout/Checkout";
 import Registration from "./pages/registration/Registration";
 import Verification from "./pages/verification/Verification";
+import Login from "./pages/login/Login";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route path="/verification">
             <Verification />
+          </Route>
+          <Route path="/login">
+            <Login />
           </Route>
           <Route path="/cart">
             <Cart />

@@ -120,7 +120,11 @@ const Registration = () => {
                   />
                 </Form.Group>
                 <div className="d-grid mb-3">
-                  <Button variant="primary" type="submit">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    className="green-button"
+                  >
                     Register
                   </Button>
                 </div>

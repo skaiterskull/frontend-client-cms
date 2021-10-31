@@ -132,7 +132,11 @@ const Product = () => {
                     ))}
                   </Form.Select>
                 </Form.Group>
-                <Button disabled={productInState.qty < 1} type="submit">
+                <Button
+                  disabled={productInState.qty < 1}
+                  type="submit"
+                  className="green-button"
+                >
                   Add <i className="fas fa-shopping-cart"></i>
                 </Button>
               </Form>

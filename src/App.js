@@ -9,6 +9,8 @@ import Checkout from "./pages/checkout/Checkout";
 import Registration from "./pages/registration/Registration";
 import Verification from "./pages/verification/Verification";
 import Login from "./pages/login/Login";
+import ResetPassNotif from "./pages/reset-pass-notif/ResetPassNotif";
+import UpdatePassword from "./pages/update-password/UpdatePassword";
 
 function App() {
   return (
@@ -26,6 +28,12 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/reset-password">
+            <ResetPassNotif />
+          </Route>
+          <Route path="/update-password">
+            <UpdatePassword />
           </Route>
           <Route path="/cart">
             <Cart />

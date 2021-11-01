@@ -42,7 +42,7 @@ const Registration = () => {
     <Layout>
       <Container>
         <div className="regis-page" style={{ marginTop: "5rem" }}>
-          <div className="text-center fs-2 pt-5 mb-3">
+          <div className="text-center fs-2 mb-3">
             <Link to="/">E-shop</Link>
           </div>
 

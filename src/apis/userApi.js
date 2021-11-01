@@ -31,3 +31,29 @@ export const checkPin = async (email) => {
     };
   }
 };
+
+export const checkUserForLogin = async (userLoginInfo) => {
+  try {
+    const { data } = await axios.post(`${apiUrl}/olgin`, userLoginInfo);
+    return data;
+  } catch (error) {
+    const { message, status } = error.response?.data;
+    return {
+      status,
+      message,
+    };
+  }
+};
+
+export const findUserByEmail = async (email) => {
+  try {
+    const result = await axios.get(`${apiUrl}/${email}`);
+  } catch (error) {
+    return (
+      error.response?.data || {
+        status: "error",
+        message: error.message,
+      }
+    );
+  }
+};

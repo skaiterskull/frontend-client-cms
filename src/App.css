@@ -18,6 +18,13 @@ a:hover {
 .login-card {
   padding: 5rem;
   background: black;
+  margin-top: 7rem;
+  width: 700px;
+}
+
+.reset-card {
+  padding: 3rem;
+  background: black;
   margin-top: 10rem;
   width: 700px;
 }

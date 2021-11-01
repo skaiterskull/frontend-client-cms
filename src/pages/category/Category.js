@@ -14,6 +14,7 @@ const Category = () => {
   const catId = categories?.filter((value) => value.slug === category)[0];
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (catId) {
       dispatch(fetchProducts(catId?._id));
     }
@@ -61,9 +62,13 @@ const Category = () => {
               xs={6}
               className="d-flex justify-content-center mb-5"
             >
-              <Card style={{ width: "15rem" }}>
+              <Card style={{ width: "15rem", minHeight: "284px" }}>
                 <Link to={`/${category}/${value.slug}`}>
-                  <Card.Img variant="top" src={value.images[0]} />
+                  <Card.Img
+                    variant="top"
+                    src={value.images[0]}
+                    style={{ minHeight: "11.25rem" }}
+                  />
                 </Link>
                 <Card.Body>
                   <Card.Title className="text-center">{value.title}</Card.Title>

@@ -34,7 +34,7 @@ export const checkPin = async (email) => {
 
 export const checkUserForLogin = async (userLoginInfo) => {
   try {
-    const { data } = await axios.post(`${apiUrl}/olgin`, userLoginInfo);
+    const { data } = await axios.post(`${apiUrl}/login`, userLoginInfo);
     return data;
   } catch (error) {
     const { message, status } = error.response?.data;
@@ -48,6 +48,20 @@ export const checkUserForLogin = async (userLoginInfo) => {
 export const findUserByEmail = async (email) => {
   try {
     const result = await axios.get(`${apiUrl}/${email}`);
+  } catch (error) {
+    return (
+      error.response?.data || {
+        status: "error",
+        message: error.message,
+      }
+    );
+  }
+};
+
+export const updateUserPassword = async (object) => {
+  try {
+    const { data } = await axios.put(apiUrl, object);
+    return data;
   } catch (error) {
     return (
       error.response?.data || {

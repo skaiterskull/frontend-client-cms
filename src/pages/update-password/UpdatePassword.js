@@ -1,12 +1,35 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 import Layout from "../../components/Layout";
+import { updateUserPassword } from "../../apis/userApi";
+import { CustomModal } from "../../components/CustomModal";
 
 const UpdatePassword = () => {
   const [newPassword, setNewPassword] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const [showCongratPage, setShowCongratPage] = useState(false);
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("");
 
-  const handleOnSubmit = (e) => {
+  const queries = new URLSearchParams(useLocation().search);
+  const otp = queries.get("otp");
+  const email = queries.get("email");
+
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
+    const result = await updateUserPassword({
+      otp,
+      email,
+      password: newPassword.newPassword,
+    });
+    if (result.status === "success") {
+      setShowCongratPage(true);
+    } else {
+      setStatus(result.status);
+      setMessage(result.message);
+      setShowModal(true);
+    }
   };
 
   const handleOnChange = (e) => {
@@ -16,6 +39,30 @@ const UpdatePassword = () => {
       [name]: value,
     });
   };
+
+  if (!otp || !email) {
+    return (
+      <Layout>
+        <Container>
+          <div className="mb-5" style={{ marginTop: "5rem" }}>
+            <p>404 Page not found</p>
+          </div>
+        </Container>
+      </Layout>
+    );
+  }
+
+  if (showCongratPage) {
+    return (
+      <Layout>
+        <Container>
+          <div className="mb-5" style={{ marginTop: "5rem" }}>
+            <p>Your password has been updated.</p>
+          </div>
+        </Container>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -59,6 +106,14 @@ const UpdatePassword = () => {
           </Form>
         </div>
       </Container>
+      <CustomModal
+        size="sm"
+        title={status}
+        show={showModal}
+        onHide={() => setShowModal(false)}
+      >
+        <div>{message}</div>
+      </CustomModal>
     </Layout>
   );
 };

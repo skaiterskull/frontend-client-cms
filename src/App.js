@@ -11,6 +11,7 @@ import Verification from "./pages/verification/Verification";
 import Login from "./pages/login/Login";
 import ResetPassNotif from "./pages/reset-pass-notif/ResetPassNotif";
 import UpdatePassword from "./pages/update-password/UpdatePassword";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -38,10 +39,9 @@ function App() {
           <Route path="/cart">
             <Cart />
           </Route>
-          <Route path="/checkout">
+          <PrivateRoute path="/checkout">
             <Checkout />
-          </Route>
-
+          </PrivateRoute>
           <Route exact path="/:category">
             <Category />
           </Route>

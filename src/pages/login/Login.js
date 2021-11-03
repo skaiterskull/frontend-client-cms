@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
 import { CustomModal } from "../../components/CustomModal";
 import { checkUserForLogin } from "../../apis/userApi";
@@ -18,9 +18,13 @@ const Login = () => {
   const [status, setStatus] = useState("");
   const [message, setMessage] = useState("");
 
+  const { isLoggedIn } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/dashboard";
+  console.log(from, "login form");
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setUserLoginData({
@@ -29,16 +33,18 @@ const Login = () => {
     });
   };
 
+  useEffect(() => {
+    isLoggedIn && history.replace(from);
+  }, [isLoggedIn]);
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const result = await checkUserForLogin(userLoginData);
 
     if (result.status === "success") {
-      console.log(result.result);
-      history.push("/home");
       window.localStorage.setItem("refreshJWT", result.token.refreshJwt);
       window.sessionStorage.setItem("accessJWT", result.token.accessJwt);
-      return dispatch(LOGIN_SUCCESS(result.result));
+      dispatch(LOGIN_SUCCESS(result.result));
     } else {
       setStatus(result.status);
       setMessage(result.message);

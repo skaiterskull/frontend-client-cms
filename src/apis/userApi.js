@@ -37,11 +37,12 @@ export const checkUserForLogin = async (userLoginInfo) => {
     const { data } = await axios.post(`${apiUrl}/login`, userLoginInfo);
     return data;
   } catch (error) {
-    const { message, status } = error.response?.data;
-    return {
-      status,
-      message,
-    };
+    return (
+      error.response?.data || {
+        status: "error",
+        message: error.message,
+      }
+    );
   }
 };
 

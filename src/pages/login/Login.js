@@ -32,9 +32,13 @@ const Login = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const result = await checkUserForLogin(userLoginData);
+
     if (result.status === "success") {
+      console.log(result.result);
       history.push("/home");
-      return dispatch(LOGIN_SUCCESS());
+      window.localStorage.setItem("refreshJWT", result.token.refreshJwt);
+      window.sessionStorage.setItem("accessJWT", result.token.accessJwt);
+      return dispatch(LOGIN_SUCCESS(result.result));
     } else {
       setStatus(result.status);
       setMessage(result.message);

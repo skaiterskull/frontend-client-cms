@@ -39,8 +39,17 @@ const Header = () => {
             <Nav>
               <LinkContainer to="/dashboard">
                 <Nav.Link>
-                  {loggedInUser.fname.toUpperCase()}{" "}
-                  <i class="fas fa-user-alt"></i>
+                  <img
+                    src="http://localhost:8000/img/products/apple11635140893197.png"
+                    alt=""
+                    style={{
+                      width: "23px",
+                      height: "23px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                  {"  "}
+                  {loggedInUser.fname.toUpperCase()}
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/cart">

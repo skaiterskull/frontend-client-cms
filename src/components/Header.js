@@ -40,7 +40,7 @@ const Header = () => {
               <LinkContainer to="/dashboard">
                 <Nav.Link>
                   <img
-                    src="http://localhost:8000/img/products/apple11635140893197.png"
+                    src="http://localhost:8000/img/products/me.png"
                     alt=""
                     style={{
                       width: "23px",

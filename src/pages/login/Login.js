@@ -35,7 +35,7 @@ const Login = () => {
 
   useEffect(() => {
     isLoggedIn && history.replace(from);
-  }, [isLoggedIn]);
+  }, [isLoggedIn, history, from]);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();

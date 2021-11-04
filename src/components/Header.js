@@ -6,6 +6,7 @@ import { fecthCategory } from "../pages/category/categoryAction";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { isLoggedIn, loggedInUser } = useSelector((state) => state.user);
   const { categories } = useSelector((state) => state.category);
   const { cartList } = useSelector((state) => state.cart);
 
@@ -14,6 +15,51 @@ const Header = () => {
       dispatch(fecthCategory());
     }
   }, [dispatch, categories]);
+
+  if (isLoggedIn) {
+    return (
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
+        <Container>
+          <LinkContainer to="/">
+            <Navbar.Brand>E-Shop</Navbar.Brand>
+          </LinkContainer>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              {categories.map(
+                (value) =>
+                  !value.parentCat &&
+                  value.status === "active" && (
+                    <LinkContainer to={`/${value.slug}`} key={value._id}>
+                      <Nav.Link key={value._id}>{value.name}</Nav.Link>
+                    </LinkContainer>
+                  )
+              )}
+            </Nav>
+            <Nav>
+              <LinkContainer to="/dashboard">
+                <Nav.Link>
+                  {loggedInUser.fname.toUpperCase()}{" "}
+                  <i class="fas fa-user-alt"></i>
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/cart">
+                <Nav.Link>
+                  Cart <i className="fas fa-shopping-cart"></i> (
+                  {cartList?.reduce(
+                    (ttlItem, value) => (ttlItem = ttlItem + value?.qty),
+                    0
+                  )}
+                  )
+                </Nav.Link>
+              </LinkContainer>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    );
+  }
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
       <Container>

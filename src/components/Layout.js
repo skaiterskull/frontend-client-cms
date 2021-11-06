@@ -8,7 +8,12 @@ const Layout = ({ children }) => {
       <header>
         <Header />
       </header>
-      <main style={{ minHeight: "92.6vh" }}>{children}</main>
+      <main
+        className="bg-light"
+        style={{ minHeight: "92.6vh", paddingTop: "5rem" }}
+      >
+        {children}
+      </main>
       <footer className="bg-dark p-4 text-light d-flex justify-content-center">
         <Footer />
       </footer>

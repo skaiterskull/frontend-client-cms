@@ -12,12 +12,12 @@ const Cart = () => {
   return (
     <Layout>
       <Container>
-        <h2 style={{ marginTop: "5rem" }}>Shopping Cart</h2>
+        <h2>Shopping Cart</h2>
         <hr />
 
         {cartList.length ? (
           <>
-            <Table responsive>
+            <Table responsive striped>
               <thead className="bg-dark text-light">
                 <tr>
                   <th></th>

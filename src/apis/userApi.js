@@ -59,6 +59,22 @@ export const findUserByEmail = async (email) => {
   }
 };
 
+export const findUserByToken = async () => {
+  try {
+    const { data } = await axios.get(apiUrl, {
+      headers: { authorization: window.sessionStorage.getItem("accessJWT") },
+    });
+    return data;
+  } catch (error) {
+    return (
+      error.response?.data || {
+        status: "error",
+        message: error.message,
+      }
+    );
+  }
+};
+
 export const updateUserPassword = async (object) => {
   try {
     const { data } = await axios.put(apiUrl, object);

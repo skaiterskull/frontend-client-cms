@@ -11,10 +11,6 @@ a:hover {
   text-transform: uppercase;
 }
 
-.regis-page {
-  background: #fff;
-}
-
 .login-card {
   padding: 5rem;
   background: black;
@@ -25,7 +21,7 @@ a:hover {
 .reset-card {
   padding: 3rem;
   background: black;
-  margin-top: 10rem;
+  margin-top: 5rem;
   width: 700px;
 }
 

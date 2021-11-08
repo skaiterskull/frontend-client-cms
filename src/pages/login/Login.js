@@ -4,27 +4,24 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
 import { CustomModal } from "../../components/CustomModal";
-import { checkUserForLogin } from "../../apis/userApi";
-import { LOGIN_SUCCESS } from "../home/userSlice";
+import { userLogin, autoLogin } from "../userData/userAction";
 
 const initialState = {
-  email: "",
-  password: "",
+  email: "hendra2.here@yahoo.com",
+  password: "aaaaaaaa",
 };
 
 const Login = () => {
   const [userLoginData, setUserLoginData] = useState(initialState);
   const [showModal, setShowModal] = useState(false);
-  const [status, setStatus] = useState("");
-  const [message, setMessage] = useState("");
 
-  const { isLoggedIn } = useSelector((state) => state.user);
+  const { isLoggedIn, serverResp } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/dashboard";
-  console.log(from, "login form");
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setUserLoginData({
@@ -34,22 +31,14 @@ const Login = () => {
   };
 
   useEffect(() => {
+    !isLoggedIn && dispatch(autoLogin());
     isLoggedIn && history.replace(from);
-  }, [isLoggedIn, history, from]);
+  }, [isLoggedIn, history, from, dispatch]);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const result = await checkUserForLogin(userLoginData);
-
-    if (result.status === "success") {
-      window.localStorage.setItem("refreshJWT", result.token.refreshJwt);
-      window.sessionStorage.setItem("accessJWT", result.token.accessJwt);
-      dispatch(LOGIN_SUCCESS(result.result));
-    } else {
-      setStatus(result.status);
-      setMessage(result.message);
-      setShowModal(true);
-    }
+    dispatch(userLogin(userLoginData));
+    setShowModal(true);
   };
 
   return (
@@ -68,6 +57,7 @@ const Login = () => {
           <Form onSubmit={handleOnSubmit}>
             <Form.Floating className="mb-3">
               <Form.Control
+                value={userLoginData.email}
                 name="email"
                 id="floatingInputCustom"
                 type="email"
@@ -79,6 +69,7 @@ const Login = () => {
             </Form.Floating>
             <Form.Floating>
               <Form.Control
+                value={userLoginData.password}
                 name="password"
                 id="floatingPasswordCustom"
                 type="password"
@@ -106,11 +97,11 @@ const Login = () => {
       </Container>
       <CustomModal
         size="sm"
-        title={status}
+        title={serverResp.status}
         show={showModal}
         onHide={() => setShowModal(false)}
       >
-        <div>{message}</div>
+        <div>{serverResp.message}</div>
       </CustomModal>
     </Layout>
   );

@@ -24,7 +24,7 @@ const Category = () => {
     return (
       <Layout>
         <Container>
-          <p style={{ marginTop: "5rem", fontSize: "20px" }}>
+          <p style={{ fontSize: "20px" }}>
             <span style={{ fontSize: "30px", color: "red" }}>404</span> Page not
             found
           </p>
@@ -48,9 +48,7 @@ const Category = () => {
   return (
     <Layout>
       <Container>
-        <h2 className="uppercase" style={{ marginTop: "5rem" }}>
-          {category} page.
-        </h2>
+        <h2 className="uppercase">{category} page.</h2>
         <p>{productList.length} products found.</p>
         <Row>
           {productList.map((value) => (

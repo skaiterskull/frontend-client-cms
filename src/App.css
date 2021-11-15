@@ -34,3 +34,17 @@ a:hover {
 .green-button:hover {
   background: rgb(2, 82, 2);
 }
+
+.payment-info {
+  opacity: 1;
+  animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

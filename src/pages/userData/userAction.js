@@ -23,7 +23,6 @@ export const userLogin = (userData) => async (dispatch) => {
 //PRIVATE API
 export const fetchUserInfo = () => async (dispatch) => {
   const result = await findUserByToken();
-  // todo handle on jwt exp
   if (result.message === "JWT expired") {
     const result = await requestNewAccessJwt();
     if (result?.token) {

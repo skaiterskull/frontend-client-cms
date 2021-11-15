@@ -50,12 +50,22 @@ const Checkout = () => {
     e.preventDefault();
 
     const { paymentOption, ...user } = formDt;
-
-    const userDetails = loggedInUser;
+    const {
+      createdAt,
+      isEmailConfirmed,
+      updatedAt,
+      __v,
+      dob,
+      address,
+      role,
+      status,
+      ...restUser
+    } = loggedInUser;
 
     const paymentDetails = {
       method: paymentOption,
       transactionId: "",
+      totalPaid: 0,
     };
 
     const invoiceDetails = {
@@ -67,7 +77,7 @@ const Checkout = () => {
     const billingAddressDetails = user;
 
     const obj = {
-      userDetails,
+      userDetails: restUser,
       cartDetails: cartList,
       paymentDetails,
       invoiceDetails,

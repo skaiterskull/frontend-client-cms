@@ -38,7 +38,7 @@ const Login = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     dispatch(userLogin(userLoginData));
-    setShowModal(true);
+    // setShowModal(true);
   };
 
   return (

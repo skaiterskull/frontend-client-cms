@@ -8,6 +8,8 @@ import {
   AUTOLOGIN_SUCCESS,
 } from "./userSlice";
 
+import { toast } from "react-toastify";
+
 export const userLogin = (userData) => async (dispatch) => {
   const result = await checkUserForLogin(userData);
   if (result.status === "success") {
@@ -17,6 +19,7 @@ export const userLogin = (userData) => async (dispatch) => {
     dispatch(fetchUserInfo());
   } else {
     dispatch(LOGIN_FAILED(result));
+    toast.error(result.message);
   }
 };
 

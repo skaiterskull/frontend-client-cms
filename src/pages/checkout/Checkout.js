@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Layout from "../../components/Layout";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllPaymentOptions } from "./paymentAction";
+import { sendOrder } from "../orderData/orderAction";
 
 const initialState = {
   fname: "",
@@ -59,6 +60,7 @@ const Checkout = () => {
       address,
       role,
       status,
+      gender,
       ...restUser
     } = loggedInUser;
 
@@ -74,17 +76,17 @@ const Checkout = () => {
       totalNet: total - tax,
     };
 
-    const billingAddressDetails = user;
+    const shippingAddressDetails = user;
 
     const obj = {
       userDetails: restUser,
       cartDetails: cartList,
       paymentDetails,
       invoiceDetails,
-      billingAddressDetails,
+      shippingAddressDetails,
     };
 
-    console.log(obj);
+    dispatch(sendOrder(obj));
   };
 
   return (

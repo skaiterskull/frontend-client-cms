@@ -13,9 +13,13 @@ import ResetPassNotif from "./pages/reset-pass-notif/ResetPassNotif";
 import UpdatePassword from "./pages/update-password/UpdatePassword";
 import PrivateRoute from "./components/PrivateRoute";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <div>
+      <ToastContainer />
       <Router>
         <Switch>
           <Route exact path="/">

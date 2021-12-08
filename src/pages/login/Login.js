@@ -3,7 +3,6 @@ import { Container, Form, Button } from "react-bootstrap";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
-import { CustomModal } from "../../components/CustomModal";
 import { userLogin, autoLogin } from "../userData/userAction";
 
 const initialState = {
@@ -13,9 +12,8 @@ const initialState = {
 
 const Login = () => {
   const [userLoginData, setUserLoginData] = useState(initialState);
-  const [showModal, setShowModal] = useState(false);
 
-  const { isLoggedIn, serverResp } = useSelector((state) => state.user);
+  const { isLoggedIn } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -38,7 +36,6 @@ const Login = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     dispatch(userLogin(userLoginData));
-    // setShowModal(true);
   };
 
   return (
@@ -95,14 +92,6 @@ const Login = () => {
           </Form>
         </div>
       </Container>
-      <CustomModal
-        size="sm"
-        title={serverResp.status}
-        show={showModal}
-        onHide={() => setShowModal(false)}
-      >
-        <div>{serverResp.message}</div>
-      </CustomModal>
     </Layout>
   );
 };

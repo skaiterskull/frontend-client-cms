@@ -5,6 +5,7 @@ import productReducer from "./pages/category/productSlice";
 import cartReducer from "./pages/cart/cartSlice";
 import userReducer from "./pages/userData/userSlice";
 import paymentReducer from "./pages/checkout/paymentSlice";
+import orderReducer from "./pages/orderData/orderSlice";
 import storage from "redux-persist/lib/storage";
 
 const persistCartConfig = {
@@ -21,6 +22,7 @@ const store = configureStore({
     cart: persistedCartReducer,
     user: userReducer,
     payOpt: paymentReducer,
+    order: orderReducer,
   },
 });
 

@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllPaymentOptions } from "./paymentAction";
 import { sendOrder } from "../orderData/orderAction";
+import { useHistory } from "react-router-dom";
 
 const initialState = {
   fname: "",
@@ -19,10 +20,12 @@ const Checkout = () => {
   const { loggedInUser } = useSelector((state) => state.user);
   const { cartList } = useSelector((state) => state.cart);
   const { payOpt } = useSelector((state) => state.payOpt);
+  const { orderResp } = useSelector((state) => state.order);
   const [selectedPayOpt, setSelectedPayOpt] = useState("");
   const [formDt, setformDt] = useState(initialState);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const total = cartList?.reduce(
     (total, value) => total + value?.qty * value?.price,
@@ -32,7 +35,10 @@ const Checkout = () => {
 
   useEffect(() => {
     !payOpt?.length && dispatch(fetchAllPaymentOptions());
-  }, [dispatch, payOpt.length]);
+    if (orderResp === "success") {
+      history.replace("/checkout/notification");
+    }
+  }, [dispatch, payOpt.length, history, orderResp]);
 
   const handleOnChange = (e) => {
     const { checked, value, name } = e.target;

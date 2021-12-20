@@ -4,6 +4,7 @@ import { Container, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { RESET_ORDER } from "../orderData/orderSlice";
+import { RESET_CART } from "../cart/cartSlice";
 
 const CheckoutComplete = () => {
   const { order } = useSelector((state) => state.order);
@@ -13,6 +14,7 @@ const CheckoutComplete = () => {
 
   const handleOnClick = (e) => {
     e.preventDefault();
+    dispatch(RESET_CART());
     dispatch(RESET_ORDER());
     history.replace("/");
   };

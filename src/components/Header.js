@@ -37,6 +37,11 @@ const Header = () => {
           </Nav>
           {isLoggedIn ? (
             <Nav>
+              <LinkContainer to="/profile">
+                <Nav.Link>
+                  My Profile <i class="fas fa-user-circle"></i>
+                </Nav.Link>
+              </LinkContainer>
               <LinkContainer to="/cart">
                 <Nav.Link>
                   Cart <i className="fas fa-shopping-cart"></i> (

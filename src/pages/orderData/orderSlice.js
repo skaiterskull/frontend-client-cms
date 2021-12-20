@@ -14,7 +14,8 @@ const orderSlice = createSlice({
       state.orderResp = payload.status;
     },
     RESET_ORDER: (state) => {
-      state = initialState;
+      state.order = "";
+      state.orderResp = "";
     },
   },
 });

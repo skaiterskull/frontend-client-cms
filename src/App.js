@@ -13,6 +13,8 @@ import ResetPassNotif from "./pages/reset-pass-notif/ResetPassNotif";
 import UpdatePassword from "./pages/update-password/UpdatePassword";
 import PrivateRoute from "./components/PrivateRoute";
 import CheckoutComplete from "./pages/checkoutComplete/CheckoutComplete";
+import Profile from "./pages/profile/Profile";
+import EditProfile from "./pages/editProfile/EditProfile";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -44,6 +46,12 @@ function App() {
           <Route path="/cart">
             <Cart />
           </Route>
+          <PrivateRoute exact path="/profile">
+            <Profile />
+          </PrivateRoute>
+          <PrivateRoute exact path="/profile/edit">
+            <EditProfile />
+          </PrivateRoute>
           <PrivateRoute exact path="/checkout">
             <Checkout />
           </PrivateRoute>

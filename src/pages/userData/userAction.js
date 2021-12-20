@@ -9,6 +9,7 @@ import {
 } from "./userSlice";
 
 import { toast } from "react-toastify";
+import { RESET_CART } from "../cart/cartSlice";
 
 export const userLogin = (userData) => async (dispatch) => {
   const result = await checkUserForLogin(userData);
@@ -66,4 +67,5 @@ export const userLogout = () => (dispatch) => {
   window.localStorage.removeItem("refreshJWT");
   window.sessionStorage.removeItem("accessJWT");
   dispatch(LOGOUT_SUCCESS());
+  dispatch(RESET_CART());
 };

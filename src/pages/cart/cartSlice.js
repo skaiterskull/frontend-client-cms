@@ -33,9 +33,14 @@ const cartSlice = createSlice({
       const arg = state.cartList?.filter((row) => row._id !== payload);
       state.cartList = arg;
     },
+
+    RESET_CART: (state) => {
+      state.cartList = [];
+    },
   },
 });
 
 const { reducer, actions } = cartSlice;
-export const { REQ_ADD_CART, REQ_UPDATE_QTY, REQ_REMOVE_CART } = actions;
+export const { REQ_ADD_CART, REQ_UPDATE_QTY, REQ_REMOVE_CART, RESET_CART } =
+  actions;
 export default reducer;

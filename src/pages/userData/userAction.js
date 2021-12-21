@@ -69,3 +69,8 @@ export const userLogout = () => (dispatch) => {
   dispatch(LOGOUT_SUCCESS());
   dispatch(RESET_CART());
 };
+
+//PRIVATE API
+export const profileUpdate = (obj) => (dispatch) => {
+  //
+};

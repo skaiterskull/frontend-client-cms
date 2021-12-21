@@ -1,11 +1,14 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import { Container } from "react-bootstrap";
+import EditProfileForm from "../../components/EditProfileForm";
 
 const EditProfile = () => {
   return (
     <Layout>
-      <Container>This is edit profiler</Container>
+      <Container>
+        <EditProfileForm />
+      </Container>
     </Layout>
   );
 };

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { profileUpdate } from "../pages/userData/userAction";
 
 const EditProfileForm = () => {
   const { loggedInUser } = useSelector((state) => state.user);
 
   const [updatedUserInfo, setUpdatedUserInfo] = useState("");
+
+  const dispatch = useDispatch();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -15,12 +18,15 @@ const EditProfileForm = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const obj = {
+      email: updatedUserInfo.email,
       fname: updatedUserInfo.fname,
       lname: updatedUserInfo.lname,
       dob: updatedUserInfo.dob,
       phone: updatedUserInfo.phone,
       address: updatedUserInfo.address,
     };
+
+    dispatch(profileUpdate(obj));
   };
 
   useEffect(() => {
@@ -76,7 +82,11 @@ const EditProfileForm = () => {
           <Form.Control
             type="date"
             name="dob"
-            value={updatedUserInfo.dob}
+            value={
+              updatedUserInfo.dob
+                ? updatedUserInfo.dob.substr(0, 10)
+                : undefined
+            }
             onChange={handleOnChange}
           />
         </Col>

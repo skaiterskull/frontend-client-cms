@@ -1,9 +1,14 @@
-import { checkUserForLogin, findUserByToken } from "../../apis/userApi";
+import {
+  checkUserForLogin,
+  editUserProfile,
+  findUserByToken,
+} from "../../apis/userApi";
 import { requestNewAccessJwt } from "../../apis/sessionApi";
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   FETCH_USER_SUCCESS,
+  UPDATE_PROFILE_SUCCESS,
   LOGOUT_SUCCESS,
   AUTOLOGIN_SUCCESS,
 } from "./userSlice";
@@ -71,6 +76,21 @@ export const userLogout = () => (dispatch) => {
 };
 
 //PRIVATE API
-export const profileUpdate = (obj) => (dispatch) => {
-  //
+export const profileUpdate = (obj) => async (dispatch) => {
+  //Calling api
+  const result = await editUserProfile(obj);
+  if (result.message === "JWT expired") {
+    const result = await requestNewAccessJwt();
+    if (result?.token) {
+      window.sessionStorage.setItem("accessJWT", result.token);
+      return dispatch(profileUpdate(obj));
+    }
+  }
+
+  if (result.status === "success") {
+    dispatch(UPDATE_PROFILE_SUCCESS(result));
+    return toast.success(result.message);
+  }
+
+  toast.error(result.message);
 };

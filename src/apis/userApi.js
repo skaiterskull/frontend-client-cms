@@ -88,3 +88,19 @@ export const updateUserPassword = async (object) => {
     );
   }
 };
+
+export const editUserProfile = async (object) => {
+  try {
+    const { data } = await axios.patch(apiUrl, object, {
+      headers: { authorization: window.sessionStorage.getItem("accessJWT") },
+    });
+    return data;
+  } catch (error) {
+    return (
+      error.response?.data || {
+        status: "error",
+        message: error.message,
+      }
+    );
+  }
+};

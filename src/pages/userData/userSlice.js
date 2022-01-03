@@ -13,12 +13,19 @@ const userSlice = createSlice({
     LOGIN_SUCCESS: (state) => {
       state.isLoggedIn = true;
     },
+
     LOGIN_FAILED: (state, { payload }) => {
       state.serverResp = payload;
     },
 
     FETCH_USER_SUCCESS: (state, { payload }) => {
       state.loggedInUser = payload.result;
+    },
+
+    UPDATE_PROFILE_SUCCESS: (state, { payload }) => {
+      if (payload.result) {
+        state.loggedInUser = payload.result;
+      }
     },
 
     AUTOLOGIN_SUCCESS: (state) => {
@@ -38,6 +45,7 @@ export const {
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   FETCH_USER_SUCCESS,
+  UPDATE_PROFILE_SUCCESS,
   LOGOUT_SUCCESS,
   AUTOLOGIN_SUCCESS,
 } = actions;

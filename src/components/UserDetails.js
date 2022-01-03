@@ -28,7 +28,10 @@ const UserDetails = () => {
           <strong>{loggedInUser.gender ? loggedInUser.gender : "N/A"}</strong>
         </Col>
         <Col md={8}>
-          DOB : <strong>{loggedInUser.dob ? loggedInUser.dob : "N/A"}</strong>
+          DOB :{" "}
+          <strong>
+            {loggedInUser.dob ? loggedInUser.dob.substr(0, 10) : "N/A"}
+          </strong>
         </Col>
       </Row>
       <Row>

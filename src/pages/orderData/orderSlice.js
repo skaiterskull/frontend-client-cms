@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   order: {},
+  userOrder: [],
   orderResp: "",
 };
 
@@ -9,9 +10,12 @@ const orderSlice = createSlice({
   name: "orderSlice",
   initialState,
   reducers: {
-    FETCH_ORDER_DETAIL: (state, { payload }) => {
+    ORDER_PLACED_SUCCESS: (state, { payload }) => {
       state.order = payload.result;
       state.orderResp = payload.status;
+    },
+    FETCH_USER_ORDER_SUCCESS: (state, { payload }) => {
+      state.userOrder = payload.result;
     },
     RESET_ORDER: (state) => {
       state.order = "";
@@ -21,5 +25,6 @@ const orderSlice = createSlice({
 });
 
 const { reducer, actions } = orderSlice;
-export const { FETCH_ORDER_DETAIL, RESET_ORDER } = actions;
+export const { ORDER_PLACED_SUCCESS, FETCH_USER_ORDER_SUCCESS, RESET_ORDER } =
+  actions;
 export default reducer;

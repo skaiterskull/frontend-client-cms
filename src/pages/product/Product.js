@@ -48,6 +48,7 @@ const Product = () => {
       price,
       qty: cartQty,
       slug,
+      category,
     };
     dispatch(addDataToCart(cartData));
   };

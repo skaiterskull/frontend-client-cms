@@ -20,3 +20,18 @@ export const addOrder = async (obj) => {
     };
   }
 };
+
+export const getOrder = async (email) => {
+  try {
+    const { data } = await axios.get(`${apiUrl}/${email}`, {
+      headers: { authorization: window.sessionStorage.getItem("accessJWT") },
+    });
+    return data;
+  } catch (error) {
+    const { message, status } = error.response.data;
+    return {
+      status,
+      message,
+    };
+  }
+};

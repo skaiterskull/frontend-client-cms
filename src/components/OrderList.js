@@ -10,7 +10,7 @@ const OrderList = ({ _id, date, total, status }) => {
           <div className="fw-bold fs-5">#{_id}</div>
         </Link>
         <div className="d-flex gap-2">
-          <small>20 items</small>
+          <small> items</small>
           <small>{date.substr(0, 4)}</small>
         </div>
         <div>Total ${total.total}</div>

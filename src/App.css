@@ -40,6 +40,10 @@ a:hover {
   animation: fadeIn 1s;
 }
 
+.list-group {
+  box-shadow: none !important;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

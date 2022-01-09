@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
       <Container>
-        <LinkContainer to="/">
+        <LinkContainer to="/" style={{ letterSpacing: "2px" }}>
           <Navbar.Brand>E-Shop</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -29,7 +29,11 @@ const Header = () => {
               (value) =>
                 !value.parentCat &&
                 value.status === "active" && (
-                  <LinkContainer to={`/${value.slug}`} key={value._id}>
+                  <LinkContainer
+                    to={`/${value.slug}`}
+                    key={value._id}
+                    style={{ letterSpacing: "2px" }}
+                  >
                     <Nav.Link key={value._id}>{value.name}</Nav.Link>
                   </LinkContainer>
                 )
@@ -37,12 +41,12 @@ const Header = () => {
           </Nav>
           {isLoggedIn ? (
             <Nav>
-              <LinkContainer to="/profile">
+              <LinkContainer to="/profile" style={{ letterSpacing: "2px" }}>
                 <Nav.Link>
                   My Profile <i class="fas fa-user-circle"></i>
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/cart">
+              <LinkContainer to="/cart" style={{ letterSpacing: "2px" }}>
                 <Nav.Link>
                   Cart <i className="fas fa-shopping-cart"></i> (
                   {cartList?.reduce(
@@ -52,7 +56,7 @@ const Header = () => {
                   )
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/home">
+              <LinkContainer to="/home" style={{ letterSpacing: "2px" }}>
                 <Nav.Link onClick={() => dispatch(userLogout())}>
                   Log Out
                 </Nav.Link>
@@ -60,7 +64,7 @@ const Header = () => {
             </Nav>
           ) : (
             <Nav>
-              <LinkContainer to="/cart">
+              <LinkContainer to="/cart" style={{ letterSpacing: "2px" }}>
                 <Nav.Link>
                   Cart <i className="fas fa-shopping-cart"></i> (
                   {cartList?.reduce(
@@ -70,12 +74,15 @@ const Header = () => {
                   )
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/login">
+              <LinkContainer to="/login" style={{ letterSpacing: "2px" }}>
                 <Nav.Link>
                   Login <i className="fas fa-user"></i>
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/registration">
+              <LinkContainer
+                to="/registration"
+                style={{ letterSpacing: "2px" }}
+              >
                 <Nav.Link>
                   Sign Up <i className="fas fa-user-plus"></i>
                 </Nav.Link>
